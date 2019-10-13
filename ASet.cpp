@@ -1,55 +1,73 @@
 #include "ASet.h"
-void ASet::ASet(int size)
+void ASet::ASet(int size)// size - максимальное количество чисел в множестве
 {
     this->size= size;
     this->foo= new Foo[size];
-    label=0;
+    label=0; //метка
 }
 void ASet::~ASet()
 {
  delete[] foo;
 }
-void ASet::incl( double elem)
+void ASet::incl( double elem) //Включение элемента в массив, если такое число уже есть, то ничего не делать
 {
     for(int i=0, i<=label, i++)
     {
-        if(foo[i].elem==elem)
+        if(foo[i].elem==elem && foo[i].isEmpty==false)
         {
             return;
         }
     }
-    if(label<=size)
+    if(label<=size-1)
     {
-        foo[label].elem = elem;
-        foo[label].isEmpty = false;
-        label+=1;
+        for(int p=0, p<=label, p++)
+        {
+            if(foo[p].isEmpty)
+            {
+                foo[p].elem= elem;
+                foo[p].isEmpty = false;
+                return;
+            }
+        }
     }
 }
-void ASet::excl(double tar)
+void ASet::excl(double tar) // исключить элемент по значению
 {
-    if(tar>0 || tar<=size)
+    for(int l=0, l<=label, l++)
     {
-        foo[tar].isEmpty=true;
+        if(foo[l].elem==tar && foo[i].isEmpty==false)
+        {
+            foo[l].isEmpty=true;
+            return;
+        }
     }
 }
-bool ASet::contain(double elem)
+bool ASet::contain(double elem) // содержится в множестве?
+{
+    int flag=0;
+    for(int i=0, i<=label, i++)
+    {
+        if(foo[i].elem==elem && foo[i].isEmpty==false)
+        {
+            flag=1;
+            return true;
+        }
+    }
+    if(flag==1)
+    {
+        return false;
+    }
+}
+void ASet::print()// распечатать состояние объекта
 {
     for(int i=0, i<=label, i++)
     {
-        if(foo[i].elem==elem)
+        if(foo[i].isEmpty)
         {
-            return true;
+            cout << foo[i].elem<< "it`s empty" << endl;
         }
         else
         {
-            return false;
-        }
-    }
-}
-void ASet::print()
-{
-    for(int i=0, i<=label, i++)
-    {
-        cout << foo[i].elem<< endl;
+            cout << foo[i].elem<< "it`s full"<< endl;
     }
 }
