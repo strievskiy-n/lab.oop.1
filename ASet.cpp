@@ -1,17 +1,29 @@
 #include "ASet.h"
-void ASet::ASet(int size)// size - РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ С‡РёСЃРµР» РІ РјРЅРѕР¶РµСЃС‚РІРµ
+#include <cstdlib>
+#include <iostream>
+using namespace std;
+
+void ASet::ASet(int size)// size - максимальное количество чисел в множестве
 {
-    this->size= size;
-    this->foo= new Foo[size];
-    label=0; //РјРµС‚РєР°
+    if(size<=0)
+    {
+        cout<<"Not correct size!"<<endl;
+        break;
+    }
+    else
+    {
+        this->size= size;
+        this->foo= new Foo[size];
+        label=0; //метка
+    }
 }
 void ASet::~ASet()
 {
  delete[] foo;
 }
-void ASet::incl( double elem) //Р’РєР»СЋС‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ РјР°СЃСЃРёРІ, РµСЃР»Рё С‚Р°РєРѕРµ С‡РёСЃР»Рѕ СѓР¶Рµ РµСЃС‚СЊ, С‚Рѕ РЅРёС‡РµРіРѕ РЅРµ РґРµР»Р°С‚СЊ
+void ASet::incl( double elem) //Включение элемента в массив, если такое число уже есть, то ничего не делать
 {
-    for(int i=0, i<=label, i++)
+    for(int i=0; i<=label; i++)
     {
         if(foo[i].elem==elem && foo[i].isEmpty==false)
         {
@@ -20,20 +32,28 @@ void ASet::incl( double elem) //Р’РєР»СЋС‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ РјР°СЃСЃР
     }
     if(label<=size-1)
     {
-        for(int p=0, p<=label, p++)
+        for(int p=0; p<=label; p++)
         {
             if(foo[p].isEmpty)
             {
                 foo[p].elem= elem;
                 foo[p].isEmpty = false;
+                if(p==label)
+                {
+                    label+=1;
+                }
                 return;
             }
         }
     }
+    else
+    {
+        cout<<"There no place in your array!"<<endl;
+    }
 }
-void ASet::excl(double tar) // РёСЃРєР»СЋС‡РёС‚СЊ СЌР»РµРјРµРЅС‚ РїРѕ Р·РЅР°С‡РµРЅРёСЋ
+void ASet::excl(double tar) // исключить элемент по значению
 {
-    for(int l=0, l<=label, l++)
+    for(int l=0; l<=label; l++)
     {
         if(foo[l].elem==tar && foo[i].isEmpty==false)
         {
@@ -42,10 +62,10 @@ void ASet::excl(double tar) // РёСЃРєР»СЋС‡РёС‚СЊ СЌР»РµРјРµРЅС‚ РїРѕ Р·РЅР°С‡Рµ
         }
     }
 }
-bool ASet::contain(double elem) // СЃРѕРґРµСЂР¶РёС‚СЃСЏ РІ РјРЅРѕР¶РµСЃС‚РІРµ?
+bool ASet::contain(double elem) // содержится в множестве?
 {
     int flag=0;
-    for(int i=0, i<=label, i++)
+    for(int i=0; i<=label; i++)
     {
         if(foo[i].elem==elem && foo[i].isEmpty==false)
         {
@@ -53,14 +73,14 @@ bool ASet::contain(double elem) // СЃРѕРґРµСЂР¶РёС‚СЃСЏ РІ РјРЅРѕР¶РµСЃС‚РІРµ?
             return true;
         }
     }
-    if(flag==1)
+    if(flag==0)
     {
         return false;
     }
 }
-void ASet::print()// СЂР°СЃРїРµС‡Р°С‚Р°С‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ РѕР±СЉРµРєС‚Р°
+void ASet::print()// распечатать состояние объекта
 {
-    for(int i=0, i<=label, i++)
+    for(int i=0; i<=label; i++)
     {
         if(foo[i].isEmpty)
         {
@@ -71,3 +91,4 @@ void ASet::print()// СЂР°СЃРїРµС‡Р°С‚Р°С‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ РѕР±СЉРµРєС‚Р°
             cout << foo[i].elem<< "it`s full"<< endl;
     }
 }
+
