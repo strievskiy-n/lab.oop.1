@@ -1,3 +1,9 @@
+#include <cstdlib>
+#include <iostream>
+#include <cstring>
+#include <string>
+
+using namespace std;
 struct Foo
 {
     double elem;
@@ -11,11 +17,22 @@ private:
     int label; //номер €чейки массива данных на котором остановилась запись
 public:
     ASet(int size); // size - максимальное количество чисел в множестве
+    ASet();// ѕерегруженный конструктор
     ~ASet(); //деструктор
-    void incl(double);  // включить число в множество,
+    void incl(double elem);  // включить число в множество,
                      // если такое число уже есть, то ничего не делать
-    void excl(double);  // исключить
-    bool contain(double); // содержитс€ в множестве?
+    void excl(double tar)
+    {
+        for(int l=0; l<=label; l++)
+        {
+            if(foo[l].elem==tar && foo[l].isEmpty==false)
+            {
+                foo[l].isEmpty=true;
+                return;
+            }
+        }
+    }  // исключить
+    bool contain(double elem); // содержитс€ в множестве?
     void print(); // распечатать состо€ние объекта
 };
 

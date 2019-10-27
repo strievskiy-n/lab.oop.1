@@ -1,14 +1,13 @@
 #include "ASet.h"
-#include <cstdlib>
-#include <iostream>
+
 using namespace std;
 
-void ASet::ASet(int size)// size - максимальное количество чисел в множестве
+ASet::ASet(int size)// size - максимальное количество чисел в множестве
 {
     if(size<=0)
     {
         cout<<"Not correct size!"<<endl;
-        break;
+        return;
     }
     else
     {
@@ -17,55 +16,60 @@ void ASet::ASet(int size)// size - максимальное количество чисел в множестве
         label=0; //метка
     }
 }
-void ASet::~ASet()
+ASet::ASet() : ASet(10)
+{
+}
+
+
+ASet::~ASet()
 {
  delete[] foo;
 }
 void ASet::incl( double elem) //¬ключение элемента в массив, если такое число уже есть, то ничего не делать
 {
-    for(int i=0; i<=label; i++)
+    for(int i=0; i<label; i++)
     {
         if(foo[i].elem==elem && foo[i].isEmpty==false)
         {
             return;
         }
     }
-    if(label<=size-1)
+    if(label<=size)
     {
-        for(int p=0; p<=label; p++)
+        for(int p=0; p<label; p++)
         {
             if(foo[p].isEmpty)
             {
                 foo[p].elem= elem;
                 foo[p].isEmpty = false;
-                if(p==label)
-                {
-                    label+=1;
-                }
                 return;
             }
         }
+        if(label==size)
+        {
+            cout<<"There no place in your array!"<<endl;
+        }
+        if(label!=size)
+        {
+            if(foo[label].isEmpty)
+            {
+                foo[label].elem= elem;
+                foo[label].isEmpty = false;
+                label+=1;
+            }
+        }
+
     }
     else
     {
         cout<<"There no place in your array!"<<endl;
     }
 }
-void ASet::excl(double tar) // исключить элемент по значению
-{
-    for(int l=0; l<=label; l++)
-    {
-        if(foo[l].elem==tar && foo[i].isEmpty==false)
-        {
-            foo[l].isEmpty=true;
-            return;
-        }
-    }
-}
+
 bool ASet::contain(double elem) // содержитс€ в множестве?
 {
     int flag=0;
-    for(int i=0; i<=label; i++)
+    for(int i=0; i<label; i++)
     {
         if(foo[i].elem==elem && foo[i].isEmpty==false)
         {
@@ -80,15 +84,16 @@ bool ASet::contain(double elem) // содержитс€ в множестве?
 }
 void ASet::print()// распечатать состо€ние объекта
 {
-    for(int i=0; i<=label; i++)
+    for(int i=0; i<label; i++)
     {
         if(foo[i].isEmpty)
         {
-            cout << foo[i].elem<< "it`s empty" << endl;
+            cout << foo[i].elem<< " it`s empty" << endl;
         }
         else
         {
-            cout << foo[i].elem<< "it`s full"<< endl;
+            cout << foo[i].elem<< " it`s full"<< endl;
+        }
     }
 }
 

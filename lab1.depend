@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1571653968 source:c:\users\strievskiy-n\documents\Програмирование\3 курс\lab1\aset.cpp
+	"ASet.h"
+
+1571651202 c:\users\strievskiy-n\documents\Програмирование\3 курс\lab1\aset.h
+	<cstdlib>
+	<iostream>
+	<cstring>
+	<string>
+
+1571653193 source:c:\users\strievskiy-n\documents\Програмирование\3 курс\lab1\main.cpp
+	"ASet.h"
+	<cstdlib>
+	<iostream>
+	<cstring>
+	<string>
+
